@@ -3,7 +3,7 @@ import { AccountCircle, Bookmark, LiveTv, Movie, Theaters, Window } from "@mui/i
 
 const NavBar = () => {
   return (
-    <AppBar>
+    <AppBar sx={{ position: 'sticky' }}>
       <Container>
         <Toolbar sx={{ justifyContent: 'space-between' }}>
           <Movie />
