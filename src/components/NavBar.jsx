@@ -1,5 +1,5 @@
-import { AppBar, Container, Toolbar } from "@mui/material"
-import { AccountCircle, Bookmark, LiveTv, Movie, Theaters, Window } from "@mui/icons-material"
+import { AppBar, Avatar, Container, Toolbar } from "@mui/material"
+import { Bookmark, LiveTv, Movie, Theaters, Window } from "@mui/icons-material"
 
 const NavBar = () => {
   return (
@@ -13,7 +13,13 @@ const NavBar = () => {
             <LiveTv />
             <Bookmark />
           </Toolbar>
-          <AccountCircle />
+          <Avatar
+            alt="Remy Sharp"
+            src="https://mui.com/static/images/avatar/1.jpg"
+            sx={{
+              border: 3
+            }}
+          />
         </Toolbar>
       </Container>
     </AppBar>
