@@ -1,13 +1,13 @@
 import { BookmarkBorder } from '@mui/icons-material';
 import { Card, CardMedia, Typography, Box, Toolbar } from '@mui/material';
 
-const ImageCard = () => {
+const ImageCard = ({ title, imageURL, year }) => {
   return (
     <Card sx={{ position: 'relative', maxWidth: 345, boxShadow: 'none' }}>
       <CardMedia
         component="img"
         height="200"
-        image="https://image.tmdb.org/t/p/original//tncbMvfV0V07UZozXdBEq4Wu9HH.jpg"
+        image={imageURL || "https://tinyurl.com/45byba5t"}
         alt="Random image"
         sx={{
           borderRadius: 3
@@ -51,8 +51,8 @@ const ImageCard = () => {
         }}
       >
         <Box>
-          <Typography variant="body2">2019</Typography>
-          <Typography variant="h6">Beyond Earth</Typography>
+          <Typography variant="body2">{year || 1999}</Typography>
+          <Typography variant="h6">{title || 'Movie Title'}</Typography>
         </Box>
         <Typography variant="h6" sx={{
           backgroundColor: 'rgba(0, 0, 0, 0.5)',

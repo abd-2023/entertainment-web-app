@@ -2,7 +2,7 @@ import { Container, TextField, Toolbar, Typography } from '@mui/material'
 import './App.css'
 import NavBar from './components/NavBar'
 import { Search } from '@mui/icons-material'
-import ImageCard from './components/ImageCard'
+import CardCarousel from './components/CardCarousel'
 
 function App() {
 
@@ -21,7 +21,7 @@ function App() {
           />
         </Toolbar>
         <Typography variant="h4">Trending</Typography>
-        <ImageCard />
+        <CardCarousel />
       </Container>
     </>
   )
