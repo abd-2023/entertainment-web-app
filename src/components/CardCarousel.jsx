@@ -4,7 +4,8 @@ import 'slick-carousel/slick/slick-theme.css';
 import ImageCard from './ImageCard';
 import { v4 as uuidv4 } from 'uuid';
 
-const CardCarousel = () => {
+const CardCarousel = ({ cards }) => {
+  const posterUrl = 'https://image.tmdb.org/t/p/w500/'
 
   const settings = {
     infinite: false,
@@ -12,9 +13,9 @@ const CardCarousel = () => {
     slidesToScroll: 1, // Number of cards to scroll at once
     swipeToSlide: true,
     afterChange: function (index) {
-      console.log(
-        `Slider Changed to: ${index + 1}, background: #222; color: #bada55`
-      );
+      // console.log(
+      //   `Slider Changed to: ${index + 1}, background: #222; color: #bada55`
+      // );
     },
     responsive: [
       {
@@ -41,19 +42,24 @@ const CardCarousel = () => {
     ],
   };
 
-  const cards = [
-    { title: 'Card 1', subtitle: 'Subtitle 1', image: 'https://source.unsplash.com/random/1' },
-    { title: 'Card 2', subtitle: 'Subtitle 2', image: 'https://source.unsplash.com/random/2' },
-    { title: 'Card 3', subtitle: 'Subtitle 3', image: 'https://source.unsplash.com/random/3' },
-    { title: 'Card 4', subtitle: 'Subtitle 4', image: 'https://source.unsplash.com/random/4' },
-  ];
 
   return (
     <>
       <Slider {...settings}>
-        {cards.map(() => (
-          <ImageCard key={uuidv4()} />
-        ))}
+        {cards.map((card) => {
+          const year =
+            card.release_date ?
+              card.release_date.slice(0, 4) : card.first_air_date.slice(0, 4)
+          return (
+            <ImageCard
+              key={uuidv4()}
+              title={card.title || card.name}
+              year={year}
+              mediaType={card.media_type}
+              imageURL={`${posterUrl}${card.backdrop_path}`}
+            />
+          )
+        })}
       </Slider>
     </>
   );

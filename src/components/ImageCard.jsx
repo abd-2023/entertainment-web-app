@@ -1,7 +1,8 @@
-import { BookmarkBorder } from '@mui/icons-material';
+import { BookmarkBorder, LiveTv, Theaters } from '@mui/icons-material';
 import { Card, CardMedia, Typography, Box, Toolbar } from '@mui/material';
 
-const ImageCard = ({ title, imageURL, year }) => {
+const ImageCard = ({ title, imageURL, year, mediaType }) => {
+
   return (
     <Card sx={{ position: 'relative', maxWidth: 345, boxShadow: 'none' }}>
       <CardMedia
@@ -20,7 +21,7 @@ const ImageCard = ({ title, imageURL, year }) => {
           left: 0,
           width: '100%',
           height: '100%',
-          backgroundColor: 'rgba(0, 0, 0, 0.3)',
+          backgroundColor: 'rgba(0, 0, 0, 0.55)',
           borderRadius: 3
         }}
       />
@@ -51,12 +52,23 @@ const ImageCard = ({ title, imageURL, year }) => {
         }}
       >
         <Box>
-          <Typography variant="body2">{year || 1999}</Typography>
-          <Typography variant="h6">{title || 'Movie Title'}</Typography>
+          <Box
+            sx={{
+              display: 'flex',
+              gap: 1,
+            }}
+          >
+            <Typography variant="body2">{year || 1999}</Typography>
+            {
+              mediaType == 'movie' ? <Theaters fontSize='string' /> : <LiveTv fontSize='string' />
+            }
+            <Typography variant="body2">{mediaType || "None"}</Typography>
+          </Box>
+          <Typography variant="h6">{`${title.slice(0, 21)}${title.length >= 22 ? '...' : ''}` || 'Movie Title'}</Typography>
         </Box>
         <Typography variant="h6" sx={{
           backgroundColor: 'rgba(0, 0, 0, 0.5)',
-          px: 1,
+          px: 2,
           borderRadius: 4,
         }}>PG</Typography>
       </Toolbar>
