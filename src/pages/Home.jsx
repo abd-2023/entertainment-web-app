@@ -1,10 +1,11 @@
 import { Search } from "@mui/icons-material"
-import { Box, Container, TextField, Toolbar, Typography } from "@mui/material"
+import { Box, CircularProgress, Container, TextField, Toolbar, Typography } from "@mui/material"
 import CardCarousel from "../components/CardCarousel"
 import { useEffect, useState } from "react"
 
 const Home = () => {
   const [allTrendingMedia, setAllTrendingMedia] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
 
@@ -21,7 +22,8 @@ const Home = () => {
 
       const res = await fetch(fetchURL, options)
       const data = await res.json();
-      setAllTrendingMedia(data.results)
+      setAllTrendingMedia(data.results);
+      setLoading(false);
       // console.log('data', data.results, Array.isArray(data.results));
     }
     getAllTrendingMedia();
@@ -40,7 +42,22 @@ const Home = () => {
       </Toolbar>
       <Box sx={{ my: 3 }}>
         <Typography variant="h4">Trending</Typography>
-        <CardCarousel cards={allTrendingMedia} />
+        {
+          loading ?
+            (
+              <Box
+                sx={{
+                  background: 'rgba(0, 0, 0, .3)', borderRadius: 3, height: 200,
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center'
+                }}
+              >
+                <CircularProgress color="inherit" />
+              </Box>
+            ) :
+            (<CardCarousel cards={allTrendingMedia} />)
+        }
       </Box>
     </Container >
   )

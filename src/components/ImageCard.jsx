@@ -4,7 +4,7 @@ import { Card, CardMedia, Typography, Box, Toolbar } from '@mui/material';
 const ImageCard = ({ title, imageURL, year, mediaType }) => {
 
   return (
-    <Card sx={{ position: 'relative', maxWidth: 345, boxShadow: 'none' }}>
+    <Card sx={{ position: 'relative', maxWidth: 370, boxShadow: 'none' }}>
       <CardMedia
         component="img"
         height="200"
