@@ -13,7 +13,7 @@ const SimpleCard = ({ mediaTitle, imageURL, mediaType, year }) => {
 		<Card sx={{ position: 'relative', maxWidth: 370, boxShadow: 'none' }}>
 			<CardMedia
 				component="img"
-				height="200"
+				height="130"
 				image={imageURL || 'https://tinyurl.com/45byba5t'}
 				alt="Random image"
 				sx={{
@@ -34,7 +34,7 @@ const SimpleCard = ({ mediaTitle, imageURL, mediaType, year }) => {
 			>
 				<BookmarkBorder />
 			</Box>
-			<CardContent sx={{ display: 'flex', gap: 1, py: 0.5 }}>
+			<CardContent sx={{ display: 'flex', gap: 1, py: 0.5, pl: 0 }}>
 				<Typography variant="body2">{year || 1999}</Typography>
 				{mediaType == 'movie' ? (
 					<Theaters fontSize="string" />
@@ -43,7 +43,11 @@ const SimpleCard = ({ mediaTitle, imageURL, mediaType, year }) => {
 				)}
 				<Typography variant="body2">{mediaType || 'None'}</Typography>
 			</CardContent>
-			<CardHeader title={mediaTitle || 'Movie Title'} sx={{ py: 0 }} />
+			<CardHeader
+				title={mediaTitle || 'Movie Title'}
+				titleTypographyProps={{ fontSize: '1rem' }}
+				sx={{ py: 0, pl: 0 }}
+			/>
 		</Card>
 	)
 }
