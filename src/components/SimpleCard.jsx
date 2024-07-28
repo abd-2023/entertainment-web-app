@@ -9,13 +9,19 @@ import {
 } from '@mui/material'
 
 const SimpleCard = ({ mediaTitle, imageURL, mediaType, year }) => {
+	const posterURL = 'https://image.tmdb.org/t/p/w500/'
+
 	return (
 		<Card sx={{ position: 'relative', maxWidth: 370, boxShadow: 'none' }}>
 			<CardMedia
 				component="img"
 				height="130"
-				image={imageURL || 'https://tinyurl.com/45byba5t'}
-				alt="Random image"
+				image={
+					imageURL
+						? `${posterURL}${imageURL}`
+						: 'https://tinyurl.com/45byba5t'
+				}
+				alt={mediaTitle || 'Random Image'}
 				sx={{
 					borderRadius: 3,
 				}}
