@@ -51,8 +51,18 @@ const SimpleCard = ({ mediaTitle, imageURL, mediaType, year }) => {
 			</CardContent>
 			<CardHeader
 				title={mediaTitle || 'Movie Title'}
-				titleTypographyProps={{ fontSize: '1rem' }}
-				sx={{ py: 0, pl: 0 }}
+				titleTypographyProps={{
+					fontSize: '.85rem',
+					noWrap: true,
+					overflow: 'hidden',
+					textOverflow: 'ellipsis',
+				}}
+				sx={{
+					p: 0,
+					'& .MuiCardHeader-content': {
+						width: '100%',
+					},
+				}}
 			/>
 		</Card>
 	)
