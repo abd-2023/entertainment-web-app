@@ -48,9 +48,14 @@ const ImageCard = ({ title, imageURL, year, mediaType }) => {
 					color: 'white',
 					padding: '10px',
 					justifyContent: 'space-between',
+					gap: 1,
 				}}
 			>
-				<Box>
+				<Box
+					sx={{
+						maxWidth: '80%',
+					}}
+				>
 					<Box
 						sx={{
 							display: 'flex',
@@ -67,9 +72,15 @@ const ImageCard = ({ title, imageURL, year, mediaType }) => {
 							{mediaType || 'None'}
 						</Typography>
 					</Box>
-					<Typography variant="h6">
-						{`${title.slice(0, 21)}${title.length >= 22 ? '...' : ''}` ||
-							'Movie Title'}
+					<Typography
+						variant="h6"
+						sx={{
+							whiteSpace: 'nowrap',
+							overflow: 'hidden',
+							textOverflow: 'ellipsis',
+						}}
+					>
+						{title || 'Media Title'}
 					</Typography>
 				</Box>
 				<Typography
