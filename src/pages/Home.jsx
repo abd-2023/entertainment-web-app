@@ -1,14 +1,10 @@
 import { Search } from '@mui/icons-material'
-import {
-	Container,
-	TextField,
-	Toolbar,
-} from '@mui/material'
+import { Container, TextField, Toolbar } from '@mui/material'
 import TrendingMedia from '../components/TrendingMedia'
 import PopularMovies from '../components/PopularMovies'
+import OnTheAirTVSeries from '../components/OnTheAirTVSeries'
 
 const Home = () => {
-
 	return (
 		<Container>
 			<Toolbar sx={{ gap: 2, alignItems: 'flex-end', padding: 0 }}>
@@ -20,8 +16,9 @@ const Home = () => {
 					sx={{ flex: 'auto' }}
 				/>
 			</Toolbar>
-			<TrendingMedia/>
-			<PopularMovies/>
+			<TrendingMedia />
+			<PopularMovies />
+			<OnTheAirTVSeries />
 		</Container>
 	)
 }

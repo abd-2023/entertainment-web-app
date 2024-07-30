@@ -15,6 +15,7 @@ const options = {
 const store = (set) => ({
 	allTrendingMedia: [],
 	popularMovies: [],
+	onTheAirTVSeries: [],
 
 	getAllTrendingMedia: async (query) => {
 		let url = `${BASE_URL}${query}`
@@ -29,6 +30,13 @@ const store = (set) => ({
 		const data = await res.json()
 		// console.log('data', data)
 		set({ popularMovies: data.results })
+	},
+	getOnTheAirTVSeries: async (query) => {
+		let url = `${BASE_URL}${query}`
+		const res = await fetch(url, options)
+		const data = await res.json()
+		// console.log('data', data)
+		set({ onTheAirTVSeries: data.results })
 	},
 })
 

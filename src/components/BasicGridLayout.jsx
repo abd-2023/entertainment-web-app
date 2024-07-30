@@ -16,7 +16,7 @@ const BasicGridLayout = ({
 	}
 
 	return (
-		<Box>
+		<Box my={3}>
 			<Stack
 				direction="row"
 				spacing={2}
