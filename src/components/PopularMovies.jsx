@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import useStore from '../store'
 import BasicGridLayout from './BasicGridLayout'
+import LoadingSpinner from './LoadingSpinner'
 
 const PopularMovies = () => {
 	const popularMovies = useStore((state) => state.popularMovies)
@@ -11,13 +12,19 @@ const PopularMovies = () => {
 	}, [])
 
 	return (
-		<BasicGridLayout
-			Heading="Popular"
-			list={popularMovies.slice(0, 6)}
-			titleProp="title"
-			dateProp="release_date"
-			imageURLProp="poster_path"
-		/>
+		<>
+			{popularMovies.length ? (
+				<BasicGridLayout
+					Heading="Popular"
+					list={popularMovies.slice(0, 6)}
+					titleProp="title"
+					dateProp="release_date"
+					imageURLProp="poster_path"
+				/>
+			) : (
+				<LoadingSpinner />
+			)}
+		</>
 	)
 }
 
