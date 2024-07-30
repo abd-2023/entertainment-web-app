@@ -14,12 +14,21 @@ const options = {
 
 const store = (set) => ({
 	allTrendingMedia: [],
+	popularMovies: [],
+
 	getAllTrendingMedia: async (query) => {
 		let url = `${BASE_URL}${query}`
 		const res = await fetch(url, options)
 		const data = await res.json()
 		// console.log('data', data)
 		set({ allTrendingMedia: data.results })
+	},
+	getPopularMovies: async (query) => {
+		let url = `${BASE_URL}${query}`
+		const res = await fetch(url, options)
+		const data = await res.json()
+		// console.log('data', data)
+		set({ popularMovies: data.results })
 	},
 })
 
