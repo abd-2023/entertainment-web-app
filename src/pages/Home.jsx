@@ -3,6 +3,7 @@ import { Container, TextField, Toolbar } from '@mui/material'
 import TrendingMedia from '../components/TrendingMedia'
 import PopularMovies from '../components/PopularMovies'
 import OnTheAirTVSeries from '../components/OnTheAirTVSeries'
+import TopRatedMovies from '../components/TopRatedMovies'
 
 const Home = () => {
 	return (
@@ -19,6 +20,7 @@ const Home = () => {
 			<TrendingMedia />
 			<PopularMovies />
 			<OnTheAirTVSeries />
+			<TopRatedMovies />
 		</Container>
 	)
 }
