@@ -20,6 +20,7 @@ const PopularMovies = () => {
 					titleProp="title"
 					dateProp="release_date"
 					imageURLProp="poster_path"
+					mediaType="movie"
 				/>
 			) : (
 				<LoadingSpinner />

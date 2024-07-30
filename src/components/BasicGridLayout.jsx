@@ -8,6 +8,7 @@ const BasicGridLayout = ({
 	titleProp,
 	dateProp,
 	imageURLProp,
+	mediaType,
 }) => {
 	function getFullYear(formattedDate) {
 		const date = new Date(formattedDate)
@@ -32,7 +33,7 @@ const BasicGridLayout = ({
 						<SimpleCard
 							mediaTitle={item[titleProp]}
 							year={getFullYear(item[dateProp])}
-							mediaType="movie"
+							mediaType={mediaType}
 							imageURL={item[imageURLProp]}
 						/>
 					</Grid>
