@@ -5,12 +5,14 @@ import Home from './pages/Home'
 import Movie from './pages/Movie'
 import { Container } from '@mui/material'
 import TV from './pages/TV'
+import SearchBar from './components/SearchBar'
 
 function App() {
 	return (
 		<>
 			<NavBar />
 			<Container>
+				<SearchBar />
 				<Routes>
 					<Route path="/" element={<Home />} />
 					<Route path="/movie" element={<Movie />} />
