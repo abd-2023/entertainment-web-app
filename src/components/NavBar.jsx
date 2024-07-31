@@ -1,21 +1,30 @@
 import { AppBar, Avatar, List, ListItem } from '@mui/material'
 import { Bookmark, LiveTv, Movie, Theaters, Window } from '@mui/icons-material'
+import { Link } from 'react-router-dom'
 
 const NavBar = () => {
 	return (
 		<AppBar sx={{ position: 'sticky' }}>
 			<List sx={{ display: 'flex', height: '3.5rem' }}>
 				<ListItem sx={{ p: 0, mr: 5, justifyContent: 'end' }}>
-					<Movie />
+					<Link to="/">
+						<Movie />
+					</Link>
 				</ListItem>
 				<ListItem sx={{ p: 0, justifyContent: 'center' }}>
-					<Window />
+					<Link to="/">
+						<Window />
+					</Link>
 				</ListItem>
 				<ListItem sx={{ p: 0, justifyContent: 'center' }}>
-					<Theaters />
+					<Link to="/movie">
+						<Theaters />
+					</Link>
 				</ListItem>
 				<ListItem sx={{ p: 0, justifyContent: 'center' }}>
-					<LiveTv />
+					<Link to="/tv">
+						<LiveTv />
+					</Link>
 				</ListItem>
 				<ListItem sx={{ p: 0, justifyContent: 'center' }}>
 					<Bookmark />
