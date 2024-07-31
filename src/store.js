@@ -17,6 +17,7 @@ const store = (set) => ({
 	popularMovies: [],
 	onTheAirTVSeries: [],
 	topRatedMovies: [],
+	movieGenres: [],
 
 	getAllTrendingMedia: async (query) => {
 		let url = `${BASE_URL}${query}`
@@ -45,6 +46,13 @@ const store = (set) => ({
 		const data = await res.json()
 		// console.log('data', data)
 		set({ topRatedMovies: data.results })
+	},
+	getMovieGenres: async (query) => {
+		let url = `${BASE_URL}${query}`
+		const res = await fetch(url, options)
+		const data = await res.json()
+		// console.log('data', data)
+		set({ movieGenres: data.genres })
 	},
 })
 
