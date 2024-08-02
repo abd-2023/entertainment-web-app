@@ -8,7 +8,7 @@ const GenreGridLayout = ({ genres }) => {
 			{genres.map((genre) => (
 				<Grid key={uuidv4()} item xs={12}>
 					<Link
-						to={`genre/${genre.name.toLowerCase()}`}
+						to={`genre/${genre.name.toLowerCase()}?id=${genre.id}`}
 						style={{
 							display: 'block',
 							textDecoration: 'none',

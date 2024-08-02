@@ -1,9 +1,13 @@
 import { Box, Typography } from '@mui/material'
 import { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useLocation, useParams } from 'react-router-dom'
 
 const SingleGenreMedia = () => {
 	const name = useParams().name
+	const mediaType = useParams().media
+	const location = useLocation()
+	const queryParams = new URLSearchParams(location.search)
+	const id = queryParams.get('id')
 	const [error, setError] = useState(null)
 	const [genreMedia, setGenreMedia] = useState([])
 
@@ -29,8 +33,7 @@ const SingleGenreMedia = () => {
 
 		async function getGenreMedia() {
 			try {
-				const url =
-					'https://api.themoviedb.org/3/discover/movie?&language=en-US&page=1&with_genres=28'
+				const url = `https://api.themoviedb.org/3/discover/${mediaType}?&language=en-US&page=1&with_genres=${id}`
 				const res = await fetch(url, options)
 				if (!res.ok) {
 					throw new Error(`HTTP error: Status ${res.status}`)
