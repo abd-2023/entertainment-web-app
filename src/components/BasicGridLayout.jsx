@@ -18,15 +18,17 @@ const BasicGridLayout = ({
 
 	return (
 		<Box my={3}>
-			<Stack
-				direction="row"
-				spacing={2}
-				justifyContent="space-between"
-				alignItems="center"
-			>
-				<Typography variant="h6"> {Heading} </Typography>
-				<Typography>see more</Typography>
-			</Stack>
+			{Heading && (
+				<Stack
+					direction="row"
+					spacing={2}
+					justifyContent="space-between"
+					alignItems="center"
+				>
+					<Typography variant="h6"> {Heading} </Typography>
+					<Typography>see more</Typography>
+				</Stack>
+			)}
 			<Grid container spacing={2}>
 				{list.map((item) => (
 					<Grid item xs={6} key={uuidv4()}>

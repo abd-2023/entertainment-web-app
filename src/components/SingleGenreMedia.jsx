@@ -40,7 +40,7 @@ const SingleGenreMedia = () => {
 					throw new Error(`HTTP error: Status ${res.status}`)
 				} else {
 					const mediaData = await res.json()
-					console.log('mediaData', mediaData)
+					// console.log('mediaData', mediaData)
 					setGenreMedia(mediaData.results)
 				}
 			} catch (err) {
