@@ -1,6 +1,7 @@
 import { Box, Typography } from '@mui/material'
 import { useEffect, useState } from 'react'
 import { useLocation, useParams } from 'react-router-dom'
+import BasicGridLayout from './BasicGridLayout'
 
 const SingleGenreMedia = () => {
 	const name = useParams().name
@@ -39,7 +40,7 @@ const SingleGenreMedia = () => {
 					throw new Error(`HTTP error: Status ${res.status}`)
 				} else {
 					const mediaData = await res.json()
-					// console.log('mediaData', mediaData)
+					console.log('mediaData', mediaData)
 					setGenreMedia(mediaData.results)
 				}
 			} catch (err) {
@@ -53,6 +54,15 @@ const SingleGenreMedia = () => {
 	return (
 		<Box sx={{ my: 3 }}>
 			<Typography variant="h4">{capitalize(name)}</Typography>
+			<BasicGridLayout
+				list={genreMedia}
+				titleProp={mediaType === 'movie' ? 'title' : 'name'}
+				dateProp={
+					mediaType === 'movie' ? 'release_date' : 'first_air_date'
+				}
+				imageURLProp="poster_path"
+				mediaType={mediaType}
+			/>
 		</Box>
 	)
 }
