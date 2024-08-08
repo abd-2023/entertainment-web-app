@@ -2,6 +2,7 @@ import { Box, Pagination, PaginationItem, Typography } from '@mui/material'
 import { useEffect, useRef, useState } from 'react'
 import { useLocation, useParams } from 'react-router-dom'
 import BasicGridLayout from './BasicGridLayout'
+import ThreePagesPagination from './ThreePagesPagination'
 
 const SingleGenreMedia = () => {
 	const name = useParams().name
@@ -66,34 +67,10 @@ const SingleGenreMedia = () => {
 				imageURLProp="poster_path"
 				mediaType={mediaType}
 			/>
-			<Pagination
-				count={totalPages.current}
-				boundaryCount={0}
-				siblingCount={1}
-				showFirstButton
-				showLastButton
-				page={currentPage}
-				onChange={(event, value) => {
-					setCurrentPage(value)
-				}}
-				renderItem={(props) => {
-					if (
-						props.type === 'start-ellipsis' ||
-						props.type === 'end-ellipsis'
-					) {
-						return null
-					} else if (
-						(currentPage <= 3 &&
-							props.type === 'page' &&
-							props.page === 4) ||
-						(currentPage >= totalPages.current - 2 &&
-							props.type === 'page' &&
-							props.page === totalPages.current - 3)
-					) {
-						return null
-					}
-					return <PaginationItem {...props} />
-				}}
+			<ThreePagesPagination
+				currentPage={currentPage}
+				setCurrentPage={setCurrentPage}
+				totalPages={totalPages.current}
 			/>
 		</Box>
 	)
