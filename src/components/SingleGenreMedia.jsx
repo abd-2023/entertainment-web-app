@@ -1,5 +1,5 @@
-import { Box, Typography } from '@mui/material'
-import { useEffect, useState } from 'react'
+import { Box, Pagination, PaginationItem, Typography } from '@mui/material'
+import { useEffect, useRef, useState } from 'react'
 import { useLocation, useParams } from 'react-router-dom'
 import BasicGridLayout from './BasicGridLayout'
 
@@ -11,6 +11,8 @@ const SingleGenreMedia = () => {
 	const id = queryParams.get('id')
 	const [error, setError] = useState(null)
 	const [genreMedia, setGenreMedia] = useState([])
+	const [currentPage, setCurrentPage] = useState(1)
+	const totalPages = useRef()
 
 	function capitalize(str) {
 		return str
@@ -34,12 +36,13 @@ const SingleGenreMedia = () => {
 
 		async function getGenreMedia() {
 			try {
-				const url = `https://api.themoviedb.org/3/discover/${mediaType}?&language=en-US&page=1&with_genres=${id}`
+				const url = `https://api.themoviedb.org/3/discover/${mediaType}?&language=en-US&page=${currentPage}&with_genres=${id}`
 				const res = await fetch(url, options)
 				if (!res.ok) {
 					throw new Error(`HTTP error: Status ${res.status}`)
 				} else {
 					const mediaData = await res.json()
+					totalPages.current = mediaData.total_pages
 					// console.log('mediaData', mediaData)
 					setGenreMedia(mediaData.results)
 				}
@@ -49,7 +52,7 @@ const SingleGenreMedia = () => {
 			}
 		}
 		getGenreMedia()
-	}, [])
+	}, [currentPage])
 
 	return (
 		<Box sx={{ my: 3 }}>
@@ -62,6 +65,35 @@ const SingleGenreMedia = () => {
 				}
 				imageURLProp="poster_path"
 				mediaType={mediaType}
+			/>
+			<Pagination
+				count={totalPages.current}
+				boundaryCount={0}
+				siblingCount={1}
+				showFirstButton
+				showLastButton
+				page={currentPage}
+				onChange={(event, value) => {
+					setCurrentPage(value)
+				}}
+				renderItem={(props) => {
+					if (
+						props.type === 'start-ellipsis' ||
+						props.type === 'end-ellipsis'
+					) {
+						return null
+					} else if (
+						(currentPage <= 3 &&
+							props.type === 'page' &&
+							props.page === 4) ||
+						(currentPage >= totalPages.current - 2 &&
+							props.type === 'page' &&
+							props.page === totalPages.current - 3)
+					) {
+						return null
+					}
+					return <PaginationItem {...props} />
+				}}
 			/>
 		</Box>
 	)
