@@ -7,6 +7,7 @@ import { Container } from '@mui/material'
 import TV from './pages/TV'
 import SearchBar from './components/SearchBar'
 import SingleGenreMedia from './components/SingleGenreMedia'
+import MediaDetails from './components/MediaDetails'
 
 function App() {
 	return (
@@ -22,6 +23,7 @@ function App() {
 						path="/:media/genre/:name"
 						element={<SingleGenreMedia />}
 					/>
+					<Route path="/:media/:name" element={<MediaDetails />} />
 				</Routes>
 			</Container>
 		</>
