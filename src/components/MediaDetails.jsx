@@ -38,6 +38,7 @@ const MediaDetails = () => {
 				}
 			} catch (err) {
 				console.log('err', err)
+				setLoading(false)
 				setError(err.message)
 			}
 		}
@@ -53,11 +54,28 @@ const MediaDetails = () => {
 				alignItems: 'center',
 			}}
 		>
-			{loading ? (
-				<CircularProgress color="inherit" />
-			) : error ? (
-				<p>{error}</p>
-			) : (
+			{loading && <CircularProgress color="inherit" />}
+			{error && (
+				<>
+					<Typography
+						variant="h1"
+						align="center"
+						sx={{ fontSize: '1.5rem' }}
+					>
+						Couldn't fetch data
+					</Typography>
+					<Typography
+						align="center"
+						sx={{ fontSize: '1.2rem', m: '.7rem 0' }}
+					>
+						Sorry, There has been an error while fetching the data
+					</Typography>
+					<Typography align="center" sx={{ fontSize: '1.2rem' }}>
+						Error message : {error}
+					</Typography>
+				</>
+			)}
+			{Object.keys(data).length !== 0 && (
 				<>
 					<img
 						src={`${posterUrl}${data.poster_path}`}
