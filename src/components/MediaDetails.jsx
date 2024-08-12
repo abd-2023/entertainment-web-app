@@ -1,13 +1,46 @@
-import { useParams } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import { useLocation, useParams } from 'react-router-dom'
 
 const MediaDetails = () => {
 	const name = useParams().name
+	const type = useParams().media
+	const [data, setData] = useState([])
+	const location = useLocation()
+	const queryParams = new URLSearchParams(location.search)
+	const id = queryParams.get('id')
+	const [error, setError] = useState(null)
 
-	return (
-		<>
-			<h1>{name}</h1>
-		</>
-	)
+	useEffect(() => {
+		const AUTH_TOKEN = import.meta.env.VITE_AUTH_TOKEN
+		const options = {
+			method: 'GET',
+			headers: {
+				accept: 'application/json',
+				Authorization: `Bearer ${AUTH_TOKEN}`,
+			},
+		}
+
+		async function getData() {
+			try {
+				const url = `https://api.themoviedb.org/3/${type}/${id}?language=en-US`
+				const res = await fetch(url, options)
+				// console.log('res', res)
+				if (!res.ok) {
+					throw new Error(res.status)
+				} else {
+					const apiData = await res.json()
+					// console.log('apiData', apiData)
+					setData(apiData.results)
+				}
+			} catch (err) {
+				console.log('err', err)
+				setError(err.message)
+			}
+		}
+		getData()
+	}, [])
+
+	return <>{error ? <p>{error}</p> : <h1>{name}</h1>}</>
 }
 
 export default MediaDetails
