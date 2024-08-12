@@ -1,4 +1,4 @@
-import { Box, Typography } from '@mui/material'
+import { Box, CircularProgress, Typography } from '@mui/material'
 import { useEffect, useState } from 'react'
 import { useLocation, useParams } from 'react-router-dom'
 
@@ -45,13 +45,20 @@ const MediaDetails = () => {
 	}, [])
 
 	return (
-		<>
+		<Box
+			sx={{
+				mt: 3,
+				display: 'flex',
+				flexDirection: 'column',
+				alignItems: 'center',
+			}}
+		>
 			{loading ? (
-				<h1>Loading...</h1>
+				<CircularProgress color="inherit" />
 			) : error ? (
 				<p>{error}</p>
 			) : (
-				<Box sx={{ mt: 3 }}>
+				<>
 					<img
 						src={`${posterUrl}${data.poster_path}`}
 						alt={data.title || data.name}
@@ -71,9 +78,9 @@ const MediaDetails = () => {
 					>
 						{data.title || data.name}
 					</Typography>
-				</Box>
+				</>
 			)}
-		</>
+		</Box>
 	)
 }
 
