@@ -8,6 +8,7 @@ const MediaDetails = () => {
 	const location = useLocation()
 	const queryParams = new URLSearchParams(location.search)
 	const id = queryParams.get('id')
+	const [loading, setLoading] = useState(true)
 	const [error, setError] = useState(null)
 
 	useEffect(() => {
@@ -29,8 +30,9 @@ const MediaDetails = () => {
 					throw new Error(res.status)
 				} else {
 					const apiData = await res.json()
-					// console.log('apiData', apiData)
+					console.log('apiData', apiData)
 					setData(apiData.results)
+					setLoading(false)
 				}
 			} catch (err) {
 				console.log('err', err)
@@ -40,7 +42,17 @@ const MediaDetails = () => {
 		getData()
 	}, [])
 
-	return <>{error ? <p>{error}</p> : <h1>{name}</h1>}</>
+	return (
+		<>
+			{loading ? (
+				<h1>Loading...</h1>
+			) : error ? (
+				<p>{error}</p>
+			) : (
+				<h1>{name}</h1>
+			)}
+		</>
+	)
 }
 
 export default MediaDetails
