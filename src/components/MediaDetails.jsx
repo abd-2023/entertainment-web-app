@@ -58,7 +58,9 @@ const MediaDetails = () => {
 						style={{
 							display: 'block',
 							margin: '0 auto',
-							width: '60%',
+							width: '200px',
+							height: '300px',
+							background: 'rgb(80, 80, 80)',
 							borderRadius: '5px',
 						}}
 					/>
