@@ -1,6 +1,7 @@
-import { Box, CircularProgress, Typography } from '@mui/material'
+import { Box, CircularProgress, Stack, Typography } from '@mui/material'
 import { useEffect, useState } from 'react'
 import { useLocation, useParams } from 'react-router-dom'
+import { v4 as uuidv4 } from 'uuid'
 
 const MediaDetails = () => {
 	const name = useParams().name
@@ -12,6 +13,11 @@ const MediaDetails = () => {
 	const [loading, setLoading] = useState(true)
 	const [error, setError] = useState(null)
 	const posterUrl = 'https://image.tmdb.org/t/p/w500/'
+	const language =
+		data.spoken_languages != undefined &&
+		data.spoken_languages.filter(
+			(lang) => lang.iso_639_1 === data.original_language
+		)[0].english_name
 
 	useEffect(() => {
 		const AUTH_TOKEN = import.meta.env.VITE_AUTH_TOKEN
@@ -52,6 +58,7 @@ const MediaDetails = () => {
 				display: 'flex',
 				flexDirection: 'column',
 				alignItems: 'center',
+				gap: 3,
 			}}
 		>
 			{loading && <CircularProgress color="inherit" />}
@@ -77,6 +84,7 @@ const MediaDetails = () => {
 			)}
 			{Object.keys(data).length !== 0 && (
 				<>
+					{/* Poster */}
 					<img
 						src={`${posterUrl}${data.poster_path}`}
 						alt={data.title || data.name}
@@ -89,13 +97,128 @@ const MediaDetails = () => {
 							borderRadius: '5px',
 						}}
 					/>
-					<Typography
-						variant="h1"
-						align="center"
-						sx={{ m: '1rem 0', fontSize: '2rem' }}
+
+					<Box
+						sx={{
+							textAlign: 'center',
+						}}
 					>
-						{data.title || data.name}
-					</Typography>
+						{/* Title */}
+						<Typography
+							variant="h1"
+							align="center"
+							sx={{ fontSize: '2rem' }}
+						>
+							{data.title || data.name}
+						</Typography>
+
+						{/* Tagline */}
+						<Typography>{data.tagline}</Typography>
+
+						{/* Rating */}
+						<Typography
+							variant="h2"
+							sx={{
+								fontSize: '1.5rem',
+								fontWeight: 700,
+							}}
+						>
+							⭐{parseFloat(data.vote_average).toFixed(1)}
+							<span
+								style={{
+									fontSize: '.8rem',
+									fontWeight: 'normal',
+								}}
+							>
+								/10
+							</span>
+						</Typography>
+					</Box>
+
+					{/* Meta Info */}
+					<Stack
+						sx={{ width: '100%' }}
+						direction="row"
+						justifyContent="space-between"
+					>
+						<Box>
+							<Typography>Language</Typography>
+							<Typography>{language}</Typography>
+						</Box>
+						<Box>
+							{type === 'movie' && (
+								<>
+									<Typography>Release Date</Typography>
+									<Typography>{data.release_date}</Typography>
+								</>
+							)}
+							{type === 'tv' && (
+								<>
+									<Typography>First Air Date</Typography>
+									<Typography>
+										{data.first_air_date}
+									</Typography>
+								</>
+							)}
+						</Box>
+						<Box>
+							{type === 'movie' && (
+								<>
+									<Typography>Length</Typography>
+									<Typography>
+										{Math.floor(data.runtime / 60)} h
+									</Typography>
+								</>
+							)}
+							{type === 'tv' && (
+								<>
+									<Typography>Last Air Date</Typography>
+									<Typography>
+										{data.last_air_date}
+									</Typography>
+								</>
+							)}
+						</Box>
+					</Stack>
+
+					{/* Genres */}
+					<Box sx={{ width: '100%' }}>
+						<Typography
+							variant="h2"
+							fontSize={'1.25rem'}
+							fontWeight={600}
+						>
+							Genres
+						</Typography>
+						<Stack direction="row" spacing={1}>
+							{data.genres.map((genre) => (
+								<Typography
+									key={uuidv4()}
+									sx={{
+										background: '#000',
+										color: '#fff',
+										borderRadius: 1.5,
+										padding: '0 .5rem',
+										fontSize: '.9rem',
+									}}
+								>
+									{genre.name}
+								</Typography>
+							))}
+						</Stack>
+					</Box>
+
+					{/* Synopsis */}
+					<Box sx={{ width: '100%' }}>
+						<Typography
+							variant="h2"
+							fontSize={'1.25rem'}
+							fontWeight={600}
+						>
+							Synopsis
+						</Typography>
+						<Typography>{data.overview}</Typography>
+					</Box>
 				</>
 			)}
 		</Box>
