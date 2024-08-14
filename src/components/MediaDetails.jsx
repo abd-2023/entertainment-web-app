@@ -7,6 +7,7 @@ const MediaDetails = () => {
 	const name = useParams().name
 	const type = useParams().media
 	const [data, setData] = useState({})
+	const [cast, setCast] = useState([])
 	const location = useLocation()
 	const queryParams = new URLSearchParams(location.search)
 	const id = queryParams.get('id')
@@ -19,16 +20,17 @@ const MediaDetails = () => {
 			(lang) => lang.iso_639_1 === data.original_language
 		)[0].english_name
 
-	useEffect(() => {
-		const AUTH_TOKEN = import.meta.env.VITE_AUTH_TOKEN
-		const options = {
-			method: 'GET',
-			headers: {
-				accept: 'application/json',
-				Authorization: `Bearer ${AUTH_TOKEN}`,
-			},
-		}
+	const AUTH_TOKEN = import.meta.env.VITE_AUTH_TOKEN
+	const options = {
+		method: 'GET',
+		headers: {
+			accept: 'application/json',
+			Authorization: `Bearer ${AUTH_TOKEN}`,
+		},
+	}
 
+	// get media data
+	useEffect(() => {
 		async function getData() {
 			try {
 				const url = `https://api.themoviedb.org/3/${type}/${id}?language=en-US`
@@ -49,6 +51,27 @@ const MediaDetails = () => {
 			}
 		}
 		getData()
+	}, [])
+
+	// get cast
+	useEffect(() => {
+		async function getCast() {
+			try {
+				const url = `https://api.themoviedb.org/3/${type}/${id}/credits?language=en-US`
+				const res = await fetch(url, options)
+				// console.log('res', res)
+				if (!res.ok) {
+					throw new Error(res.status)
+				} else {
+					const credits = await res.json()
+					// console.log('creditsData', creditsData.cast.slice(0, 3))
+					setCast(credits.cast.slice(0, 3))
+				}
+			} catch (err) {
+				console.log('err', err)
+			}
+		}
+		getCast()
 	}, [])
 
 	return (
@@ -218,6 +241,33 @@ const MediaDetails = () => {
 							Synopsis
 						</Typography>
 						<Typography>{data.overview}</Typography>
+					</Box>
+
+					{/* Cast */}
+					<Box sx={{ width: '100%' }}>
+						<Typography
+							variant="h2"
+							fontSize={'1.25rem'}
+							fontWeight={600}
+						>
+							Cast
+						</Typography>
+						<Stack direction="row" spacing={1}>
+							{cast.map((actor) => (
+								<Typography
+									key={uuidv4()}
+									sx={{
+										color: '#000',
+										border: '1px solid #000',
+										borderRadius: 1.5,
+										padding: '0 .5rem',
+										fontSize: '.85rem',
+									}}
+								>
+									{actor.name}
+								</Typography>
+							))}
+						</Stack>
 					</Box>
 				</>
 			)}
