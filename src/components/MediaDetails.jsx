@@ -1,7 +1,8 @@
-import { Box, CircularProgress, Stack, Typography } from '@mui/material'
+import { Box, Button, CircularProgress, Stack, Typography } from '@mui/material'
 import { useEffect, useState } from 'react'
 import { useLocation, useParams } from 'react-router-dom'
 import { v4 as uuidv4 } from 'uuid'
+import { Launch, Reviews } from '@mui/icons-material'
 
 const MediaDetails = () => {
 	const name = useParams().name
@@ -250,7 +251,7 @@ const MediaDetails = () => {
 							fontSize={'1.25rem'}
 							fontWeight={600}
 						>
-							Cast
+							Top Cast
 						</Typography>
 						<Stack direction="row" spacing={1}>
 							{cast.map((actor) => (
@@ -269,6 +270,34 @@ const MediaDetails = () => {
 							))}
 						</Stack>
 					</Box>
+
+					<Stack direction="row" spacing={1} width="100%">
+						<Button
+							href={data.homepage}
+							target="_blank"
+							variant="contained"
+							width="100%"
+							endIcon={<Launch />}
+							sx={{
+								flexGrow: 1,
+							}}
+						>
+							Website
+						</Button>
+						{data.imdb_id && (
+							<Button
+								href={`https://www.imdb.com/title/${data.imdb_id}`}
+								target="_blank"
+								variant="contained"
+								endIcon={<Reviews />}
+								sx={{
+									flexGrow: 1,
+								}}
+							>
+								IMDB
+							</Button>
+						)}
+					</Stack>
 				</>
 			)}
 		</Box>
