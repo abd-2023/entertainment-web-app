@@ -221,8 +221,8 @@ const MediaDetails = () => {
 									sx={{
 										background: '#000',
 										color: '#fff',
-										borderRadius: 1.5,
-										padding: '0 .5rem',
+										borderRadius: '1rem',
+										padding: '.25rem .75rem',
 										fontSize: '.9rem',
 									}}
 								>
@@ -260,8 +260,8 @@ const MediaDetails = () => {
 									sx={{
 										color: '#000',
 										border: '1px solid #000',
-										borderRadius: 1.5,
-										padding: '0 .5rem',
+										borderRadius: '1rem',
+										padding: '.25rem .75rem',
 										fontSize: '.85rem',
 									}}
 								>
