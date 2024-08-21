@@ -20,7 +20,7 @@ const OnTheAirTVSeries = () => {
 					titleProp="name"
 					dateProp="first_air_date"
 					imageURLProp="poster_path"
-					mediaType="tv series"
+					mediaType="tv"
 				/>
 			) : (
 				<LoadingSpinner />

@@ -33,6 +33,7 @@ const BasicGridLayout = ({
 				{list.map((item) => (
 					<Grid item xs={6} key={uuidv4()}>
 						<SimpleCard
+							id={item.id}
 							mediaTitle={item[titleProp]}
 							year={getFullYear(item[dateProp])}
 							mediaType={mediaType}
