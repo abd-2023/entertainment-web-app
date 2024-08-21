@@ -52,6 +52,7 @@ const CardCarousel = ({ cards }) => {
 					return (
 						<ImageCard
 							key={uuidv4()}
+							id={card.id}
 							title={card.title || card.name}
 							year={year}
 							mediaType={card.media_type}
